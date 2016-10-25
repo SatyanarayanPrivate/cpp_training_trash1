@@ -1,0 +1,322 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+namespace usage::
+
+namespace __name {
+    // statements
+    func() {
+    }
+}
+
+__function () {
+    using namespace __name;
+}
+==OR==
+__function () {
+    __name:: func();
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+class member function defination::
+
+class __name {
+public:
+    member_function() {
+    }
+};
+==OR==
+class __name {
+access_specifier:
+    member_function();
+};
+
+void __name:: member_function() {
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Constructor:: useful for initializing resources
+
+class __name {
+    member1;
+    member2;
+public:
+    // simple constructor
+    __name() {
+    }
+    
+    // parameterized constructor
+    __name(arg1, arg2) {
+    }
+    
+    // Using Initialization Lists to Initialize Fields
+    __name( arg1, arg2): member1(arg1), member2(arg2) {
+    }
+    //some what it is equal to
+    __name( arg1, arg2) {
+        member1 = arg1;
+        member2 = arg2;
+    }    
+    
+    // Copy constructor
+    __name(const __name &obj) {
+    }
+};
+==OR==
+//we can define outside class declairations
+__name::__name() {
+
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Destructor:: useful for releasing resources
+class __name {
+public:
+    ~__name(void) {
+    }
+};
+==OR==
+//we can define outside class declairations
+__name::~__name() {
+
+}
+
+vitual destructor::
+    - A destructor is called whenever an object is deleted, but there are some cases when users code doesn’t know which destructor should be called.
+class CA {
+    public:
+    virtual ~CA() {
+    cout<<"dest CA"<<endl;
+    }
+};
+class CB:public CA {
+public:
+    ~CB() {
+    cout<<"dest cb"<<endl;
+    }
+};
+void main() {
+    CA *obj = new CB;
+    delete obj;
+}
+
+A class can have a pure virtual destructor provided it gives an explicit definition else where.
+class CA {
+    public:
+    virtual ~CA() = 0;
+};
+inline CA::~CA() {
+cout<<"dest CA"<<endl;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+friend function:: 
+    - defined outside that class' scope but it has the right to access all private and protected members of the class.
+    - A friend can be a function, function template, or member function, or a class or class template, in which case the entire class and 
+      all of its members are friends.
+    - Friend functions do not have a this pointer, because friends are not members of a class. Only member functions have a this pointer.    
+class __name {
+public:
+    friend void func();
+}
+void func() {
+}
+
+func();
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+static members of class:: 
+    - A static member is shared by all objects of the class
+class __name {
+public:
+    // in public only
+    static int var;
+}
+int __name:: var = 0x00;
+func() {
+// process using following
+data = __name:: var;
+}
+
+static functions of class:: 
+    - A static member function can only access static data member, other static member functions and any other functions from outside the class.
+    - Static member functions have a class scope and they do not have access to the this pointer of the class.
+    
+class __name {
+public:
+    // in public only
+    static int var;
+    static int static_func() {
+        // body
+    }
+}
+int __name:: var = 0x00; // we must initialize static variable outside class
+func() {
+// process using following
+data = __name:: static_func();
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Inheritance::
+    
+class derived-class: access-specifier base-class
+
+base class specifier        derived class member
+    public              public -> public, protected -> protected, private -> no_access
+    private             public -> private, protected -> private, private -> no_access
+    protected           public -> protected, protected -> protected, private -> no_access
+
+
+multiple Inheritance::
+
+class derived-class: access baseA, access baseB....
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Overloading::
+
+class __name {
+public:
+    __name operator+ (const __name &) {
+    }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Exception Handling::
+
+func() {
+    // throwing Exception
+    throw __name_Exception;
+}
+
+try {
+    // protected code
+    func();
+}catch( __name_Exception e1 ) {
+    // e1 catch block
+}catch( __name_Exception e2 ) {
+    // e2 catch block
+}catch( __name_Exception eN ) {
+    // eN catch block
+}
+
+creating new Exception
+
+#include <exception>
+
+struct __name: public exception {
+    func() {
+        // exception infromation
+    }
+};
+==OR==
+class __name: public exception {
+    public:
+    func() {
+        // exception infromation
+    }
+};
+
+func () {
+try {
+    throw __name();
+}catch (__name &e) {
+    e.func(); // get exception information 
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+namespace::
+Nested:
+namespace namespace_name1 {
+    // code declarations
+    namespace namespace_name2 {
+        // code declarations
+    }
+}
+
+alias definition::
+namespace new_name = current_name ;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Templates
+    // http://www.yolinux.com/TUTORIALS/Cpp-Templates.html
+
+function templates::
+
+template <typename __name_identifier>;
+
+__name_identifier func(__name_identifier a){
+    return __name_identifier;
+}
+// template specialization
+template <>
+float func <float> (float a){
+    return a;
+}
+void main(){
+    func <int> (12);
+    func <float> (11.02); // template specialization will call
+}
+    
+class templates::
+
+template <class T>
+class __name {
+    T var;
+public:
+    __name (T a) {
+    }
+    void func (T a) {}
+};
+// template specialization
+template <>
+class __name {
+    float var;
+    __name (float a) {
+    }
+    void func (float a);
+};
+template <>
+void __name<float>:: func (float a) {}
+
+void main () {
+    __name <int> obj(20);
+    __name <float> obj1(2.3); // template specialization ctor will call
+}
+
+Parameter values for templates:: 
+template <class T, int N>
+class __name {
+    T array[N];
+public:
+    T get_mem(int n) {
+        return array[n];
+    }
+    void set_mem(T val, int n) {
+        array[n] = val;
+    }
+};
+
+void main () {
+    __name <int, 10> obj;
+    __name <float, 20> obj1;    
+}
+
+
+Some possible template examples seen above:
+template <class T>          // The most usual: one class parameter.
+template <class T, class U> // Two class parameters.
+template <class T, int N>   // A class and an integer.
+template <class T = char>   // With a default value.
+template <int Tfunc (int)>  // A function as parameter.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

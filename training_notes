@@ -1,0 +1,37 @@
+==========================================================================================================================================================
+Functions::
+Generate assembly code:
+    $ g++ -g -c naming_conventions.cpp
+    $ objdump -d -M intel -S naming_conventions.o
+    
+    $ g++ -S -o my_asm_output.s example02.cpp
+    
+    $ g++ -save-temps -fverbose-asm 1FunctionProAndEpilog.cpp
+    $ gcc -save-temps -fverbose-asm 1FunctionProAndEpilog.c
+    
+    $ g++ -save-temps -fverbose-asm file_name.cpp && cat file_name.s
+==========================================================================================================================================================
+
+21/05/16
+
+virtual
+class __name: public base_class
+{
+public: 
+    vitual func() __keyword {}
+};
+__keyword
+- override
+- final
+
+========
+interface --> define rules only pure vitual function
+
+==========================================================================================================================================================
+
+26/05/16
+
+Exception handling
+- terminate method gets called while exception is generated
+
+
