@@ -374,7 +374,9 @@ public:
     }
 
     double GetRate(PndDlr ch) {
-
+        switch (ch) {
+            case PndDlr::PND : return ;
+        }
     }
 };
 
@@ -405,6 +407,13 @@ int main (){
     return 0;
 }
 }
+
+// problem on flipkart and amazon on bidding
+
+enum class AmazonItems 
+{   
+    
+};
 
 int main () {
     return 0;

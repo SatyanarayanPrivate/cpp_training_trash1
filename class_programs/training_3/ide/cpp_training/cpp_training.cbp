@@ -32,7 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../../day1/basics_day1.cpp" />
+		<Unit filename="../../day2/basics_day2.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
