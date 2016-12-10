@@ -507,7 +507,7 @@ int main () {
     return 0;
 }
 }
-
+// problem demnomination
 class Currency
 {
     int amnt;
