@@ -1,14 +1,15 @@
 //problem01:: (arr[i][j]->*fp)()
 //problem02:: generic smart pointer
 //problem03:: track objects created on heap
+
 #include <iostream>
 #include <string>
 #include <map>
 #include <typeinfo>
 using namespace std;
 
-
-namespace problem01 {
+#if 0
+// problem01
 class SmrtPtr;
 class Employee
 {
@@ -93,11 +94,11 @@ int main () {
     ConsumerBusiness (obj, 0, 0,&Employee::fun2);
     return 0;
 }
-}
+#endif
 
 
 #if 0
-namespace problem02 {
+//problem02
 class Employee {
     int x;
     int y;
@@ -115,6 +116,7 @@ public:
     void fun2 () {
         cout << "fun2 called" << endl;
     }
+    template<typename T>
     friend class GenericSmartPtr;
 };
 
@@ -166,12 +168,18 @@ map<T*, int> GenericSmartPtr<T>::MyMap;
 
 int main () {
     GenericSmartPtr<double> sm1;
-    GenericSmartPtr<int> sm2;
-    //GenericSmartPtr<Employee> sm3;
+    GenericSmartPtr<int> sm20;
+    GenericSmartPtr<int> sm21 = sm20;
+    GenericSmartPtr<Employee> sm30;
+    GenericSmartPtr<Employee> sm31 = sm30;
+    GenericSmartPtr<Employee> sm32;
+    sm32 = sm31;
+
     return 0;
 }
-}
 #endif
+
+#if 1
 template<typename TYPE>
 class CreateObject {
     bool _IsOnHeap;
@@ -218,3 +226,4 @@ int main () {
 
     return 0;
 }
+#endif
